@@ -70,9 +70,11 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
 
 
 <template>
-  <div class="
-    dashboard
-    w-body
+  <div
+    v-if="routerReady"
+    class="
+      dashboard
+      w-body
   ">
     <div class="
       dashboard__sidebar
