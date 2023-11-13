@@ -1,44 +1,53 @@
 @topbar-height: 4.6rem;
 
 .dashboard {
-  display: flex;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
 
   &__sidebar {
     position: sticky;
     top: 0;
     left: 0;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
     z-index: 40;
+    display: none;
 
-    @media screen and (min-width: 600px) {
+    &--visible {
+      display: block;
+    }
+
+    @media screen and (min-width: 768px) {
       width: 18rem;
+      display: block;
     }
   }
 
   &__navbar {
-    display: none;
     height: 100vh;
     flex: 1;
     flex-direction: column;
     padding: 1rem;
     background: var(--theme-background-color-alt);
-
-    &--visible {
-      display: flex;
-    }
-
-    @media screen and (min-width: 600px) {
-      display: flex;
-    }
   }
 
   &__navbar-top {
     height: @topbar-height;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 1.4rem;
     background: var(--theme-brand-color-shade-3);
+
+  }
+
+  &__topbar,
+  &__navbar-top {
+    :deep(svg) {
+      fill: var(--theme-foreground-color-contrast);
+    }
   }
 
   &__navbar-logo {
@@ -59,7 +68,11 @@
     padding: .8rem 1rem;
 
     &:hover {
-      background: var(--theme-background-color-hover);
+      background: var(--theme-background-color-shade-3);
+    }
+
+    &--current {
+      background: var(--theme-background-color-shade-2);
     }
   }
 
@@ -73,15 +86,11 @@
     gap: 1.8rem;
 
     z-index: 20;
-    padding: 0 1rem;
+    padding: 0 1.4rem;
     background: var(--theme-brand-color-shade-2);
     color: var(--theme-foreground-color-contrast);
 
-    :deep(svg) {
-      fill: var(--theme-foreground-color-contrast);
-    }
-
-    @media screen and (min-width: 600px) {
+    @media screen and (min-width: 768px) {
       padding: 0 1.8rem;
     }
   }

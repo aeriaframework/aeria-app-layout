@@ -76,11 +76,19 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
       dashboard
       w-body
   ">
-    <div class="
-      dashboard__sidebar
+    <div :class="`
       no-print
-    ">
+      dashboard__sidebar
+      ${ metaStore.menu.visible && 'dashboard__sidebar--visible' }
+    `">
       <div class="dashboard__navbar-top">
+        <w-icon
+          v-if="!breakpoints.md"
+          v-clickable
+          icon="multiply"
+          @click="metaStore.menu.visible = false"
+        ></w-icon>
+
         <img
           v-clickable
           :src="logoUrl"
@@ -88,10 +96,8 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
           @click="push('/dashboard')"
         />
       </div>
-      <nav :class="`
-        dashboard__navbar
-        ${ metaStore.menu.visible && 'dashboard__navbar--visible' }
-      `">
+
+      <nav class="dashboard__navbar">
         <div
           v-for="(item, index) in routesWithChildren"
           :key="`item-${index}`"
@@ -101,7 +107,10 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
             v-clickable
             v-for="(child, index) in item.children"
             :key="`child-${child.path}`"
-            class="dashboard__route"
+            :class="`
+              dashboard__route
+              ${isCurrent(child) && 'dashboard__route--current'}
+            `"
             @click="push({ name: child.name })"
           >
             <w-icon
@@ -119,7 +128,7 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
     <div class="dashboard__content">
       <div class="dashboard__topbar">
         <w-icon
-          v-if="!breakpoints.lg"
+          v-if="!breakpoints.md"
           v-clickable
           icon="bars"
           @click="metaStore.menu.visible = true"
@@ -145,11 +154,7 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
           name="topbar"
         ></router-view>
 
-        <div
-          v-if="breakpoints.md"
-          class="dashboard__topbar-separator"
-        ></div>
-
+        <div class="dashboard__topbar-separator"></div>
 
         <slot
           v-if="$slots.super"
