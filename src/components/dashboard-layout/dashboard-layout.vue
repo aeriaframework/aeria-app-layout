@@ -119,6 +119,10 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
             >
               {{ capitalize($t(child.meta.title)) }}
             </w-icon>
+
+            <w-badge v-if="child.badge" alt>
+              <w-async :promise="child.badge()"></w-async>
+            </w-badge>
           </div>
         </div>
 
@@ -181,13 +185,13 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
               </div>
 
               <div class="dashboard__user-context-roles">
-                <div
+                <w-badge
                   v-for="role in currentUser.roles"
                   :key="`role-${role}`"
-                  class="dashboard__user-context-role"
+                  large
                 >
                   {{ $t(role) }}
-                </div>
+                </w-badge>
               </div>
             </div>
           </template>
