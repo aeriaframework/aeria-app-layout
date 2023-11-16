@@ -1,4 +1,4 @@
-@topbar-height: 4.6rem;
+@topbar-height: 4.5rem;
 
 .outer-padding {
   padding: 1.4rem;
@@ -46,7 +46,8 @@
     flex: 1;
     flex-direction: column;
     padding: 1rem 1rem 6rem 1rem;
-    background: var(--theme-background-color-alt);
+    background: var(--theme-background-color-shade-2);
+    color: var(--theme-foreground-color);
     overflow-y: auto;
   }
 
@@ -55,14 +56,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--theme-brand-color-shade-3);
+    background: var(--theme-brand-color-shade-2);
     .outer-padding();
   }
 
   &__topbar,
   &__navbar-top {
     :deep(svg) {
-      fill: var(--theme-foreground-color-contrast);
+      fill: var(--theme-brand-color-contrast);
     }
   }
 
@@ -84,11 +85,11 @@
     padding: .8rem 1rem;
 
     &:hover {
-      background: var(--theme-background-color-shade-4);
+      background: var(--theme-background-color-shade-5);
     }
 
     &--current {
-      background: var(--theme-background-color-shade-3);
+      background: var(--theme-background-color-shade-4);
     }
   }
 
@@ -102,8 +103,8 @@
     gap: 1.8rem;
 
     z-index: 20;
-    background: var(--theme-brand-color-shade-2);
-    color: var(--theme-foreground-color-contrast);
+    background: var(--theme-brand-color);
+    color: var(--theme-brand-color-contrast);
 
     .topbar-outer-padding();
   }
@@ -129,7 +130,7 @@
     overflow: hidden;
     width: 2rem;
     height: 2rem;
-    background: var(--theme-background-color-alt);
+    background: var(--theme-background-color-shade-2);
   }
 
   &__user-context-header {
@@ -138,7 +139,7 @@
     align-items: flex-start;
     gap: .4rem;
     padding: .8rem;
-    background: var(--theme-background-color-alt);
+    background: var(--theme-background-color-shade-2);
   }
 
   &__user-context-roles {

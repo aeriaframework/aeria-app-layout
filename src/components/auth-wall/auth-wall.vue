@@ -2,7 +2,6 @@
 import { provide } from 'vue'
 
 provide('buttonSize', 'large')
-provide('buttonVariant', 'brand')
 provide('inputVariant', 'bold')
 provide('innerInputLabel', true)
 </script>
