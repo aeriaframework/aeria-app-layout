@@ -233,6 +233,6 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
 
 <style lang="less">
 .branded-icon {
-  fill: var(--theme-brand-color-shade-3);
+  fill: var(--theme-brand-color-shade-2);
 }
 </style>
