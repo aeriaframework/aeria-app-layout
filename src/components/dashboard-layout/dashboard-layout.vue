@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import {
   type MenuSchema,
-  type MenuAdvancedChildren,
-  type MenuAdvancedChildrenCollapsable,
   useStore,
   useNavbar,
-  useBreakpoints
 
 } from 'waltz-ui'
 
@@ -13,6 +10,7 @@ import {
   inject,
   ref,
   reactive,
+  computed,
   toRefs,
   onMounted
 
@@ -27,59 +25,24 @@ import {
 
 } from '@waltz-ui/ui'
 
-const menuSchema = inject<MenuSchema>('menuSchema', {})
+import {
+  breakpoints,
+  navbarRefs,
+  routes,
+  pushRoute,
+  routeClick
+} from '../utils'
+
+import NavbarEntry from '../navbar-entry/navbar-entry.vue'
+import NavbarEntries from '../navbar-entries/navbar-entries.vue'
+
+const menuSchema = inject<MenuSchema>('menuSchema', [])
 
 const routerReady = ref(false)
-const navbarRefs = reactive({
-  routesWithChildren: [],
-  isCurrent: (..._args: Parameters<Awaited<ReturnType<typeof useNavbar>>['isCurrent']>) => false
-})
-
 const router = ROUTER
-const { routesWithChildren, isCurrent } = toRefs(navbarRefs)
 
 const metaStore = useStore('meta')
 const userStore = useStore('user')
-const breakpoints = useBreakpoints()
-
-const push = (...args: Parameters<typeof router.push>) => {
-  window.scrollTo(0, 0)
-  router.push(...args)
-
-  if( !breakpoints.value.md ) {
-    metaStore.menu.visible = false
-  }
-}
-
-const routeClick = (node: MenuAdvancedChildren) => {
-  if( 'collapsed' in node ) {
-    node.collapsed = !node.collapsed
-    return
-  }
-
-  push({
-    name: node.name
-  })
-}
-
-const isCollapsableRouteOpen = (node: MenuAdvancedChildrenCollapsable) => {
-  if( node.children.some((subchild) => isCurrent.value(subchild)) ) {
-    node.collapsed = false
-    return true
-  }
-
-  return !node.collapsed
-}
-
-const badgeMemo: Record<string, any> = {}
-const memoizeBadge = (promise: () => Promise<any>, key: string) => {
-  if( key in badgeMemo ) {
-    return badgeMemo[key]
-  }
-
-  const result = badgeMemo[key] = promise()
-  return result
-}
 
 onMounted(async () => {
   const navbar = await useNavbar({ schema: menuSchema })
@@ -89,6 +52,14 @@ onMounted(async () => {
 })
 
 const logoUrl = new URL('/static/logo.png', import.meta.url).href
+
+const topLevelRoutes = computed(() => {
+  return routes.value.filter((route) => route.children.length === 0)
+})
+
+const parentRoutes = computed(() => {
+  return routes.value.filter((route) => route.children.length > 0)
+})
 </script>
 
 
@@ -116,73 +87,33 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
           v-clickable
           :src="logoUrl"
           class="dashboard__navbar-logo"
-          @click="push('/dashboard')"
+          @click="pushRoute('/dashboard')"
         />
       </div>
 
       <nav class="dashboard__navbar">
         <div
-          v-for="(item, index) in routesWithChildren"
+          v-if="topLevelRoutes.length > 0"
+          class="dashboard__route-group"
+        >
+          <navbar-entry
+            v-for="(item, index) in topLevelRoutes"
+            :key="`item-${index}`"
+            :item="item"
+            :memo-key="`item-${index}`"
+            @click="routeClick(item)"
+          ></navbar-entry>
+        </div>
+
+        <div
+          v-for="(item, index) in parentRoutes"
           :key="`item-${index}`"
           class="dashboard__route-group"
         >
-          <div
-            v-clickable
-            v-for="(child, cindex) in item.children"
-            :key="`child-${child.path}`"
-            @click="routeClick(child)"
-          >
-            <div
-              v-if="'meta' in child"
-              :class="`
-                dashboard__route
-                ${isCurrent(child) && 'dashboard__route--current'}
-              `"
-            >
-              <w-icon
-                :icon="child.meta.icon"
-                icon-classes="branded-icon"
-              >
-                {{ capitalize($t(child.meta.title)) }}
-              </w-icon>
-
-              <w-badge v-if="child.badge" alt>
-                <w-async :promise="memoizeBadge(child.badge, child.name || `${index}-${cindex}`)"></w-async>
-              </w-badge>
-
-              <div v-if="'collapsed' in child">
-                <w-icon v-if="isCollapsableRouteOpen(child)" icon="angle-up"></w-icon>
-                <w-icon v-else icon="angle-down"></w-icon>
-              </div>
-
-            </div>
-
-            <div v-if="isCollapsableRouteOpen(child)">
-              <div
-                v-for="subchild in child.children"
-                :key="`subchild-${child.name}`"
-                :class="`
-                  dashboard__route
-                  dashboard__route--sub
-                  ${isCurrent(subchild) && 'dashboard__route--current'}
-                `"
-                @click.stop="push({ name: subchild.name })"
-              >
-                <w-icon
-                  :icon="subchild.meta.icon"
-                  icon-classes="branded-icon"
-                >
-                  {{ capitalize($t(subchild.meta.title)) }}
-                </w-icon>
-
-                <w-badge v-if="subchild.badge" alt>
-                  <w-async :promise="memoizeBadge(subchild.badge, subchild.name)"></w-async>
-                </w-badge>
-
-              </div>
-            </div>
-
-          </div>
+          <navbar-entries
+            :item="item"
+            :memo-key="`parent-${index}`"
+          ></navbar-entries>
         </div>
 
       </nav>
@@ -202,7 +133,7 @@ const logoUrl = new URL('/static/logo.png', import.meta.url).href
           v-clickable
           :src="logoUrl"
           class="dashboard__topbar-logo"
-          @click="push('/dashboard')"
+          @click="pushRoute('/dashboard')"
         />
 
         <div
