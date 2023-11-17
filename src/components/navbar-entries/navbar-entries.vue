@@ -38,5 +38,3 @@ const props = withDefaults(defineProps<Props>(), {
   </div>
 
 </template>
-
-<style scoped src="./navbar-entries.less"></style>

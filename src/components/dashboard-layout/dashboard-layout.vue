@@ -100,7 +100,7 @@ const parentRoutes = computed(() => {
             v-for="(item, index) in topLevelRoutes"
             :key="`item-${index}`"
             :item="item"
-            :memo-key="`item-${index}`"
+            :memo-key="`entry-${index}`"
             @click="routeClick(item)"
           ></navbar-entry>
         </div>
