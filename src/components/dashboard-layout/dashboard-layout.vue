@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import {
-  type MenuSchema,
-  useStore,
-  useNavbar,
-
-} from 'waltz-ui'
+import { type MenuSchema, useStore, useNavbar } from 'waltz-ui'
+import { WIcon, WContextMenu, WPicture, WBadge } from '@waltz-ui/ui'
 
 import {
   inject,
@@ -16,14 +12,6 @@ import {
 
 } from 'vue'
 
-import {
-  WIcon,
-  WContextMenu,
-  WPicture,
-  WBadge,
-  WAsync
-
-} from '@waltz-ui/ui'
 
 import {
   breakpoints,

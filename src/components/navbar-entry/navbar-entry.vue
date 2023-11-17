@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
 import type { MenuAdvancedChild, MenuAdvancedChildCollapsable } from 'waltz-ui'
+import { WIcon, WBadge, WAsync } from 'waltz-ui'
 import { isCurrent, memoizeBadge, isCollapsableRouteOpen } from '../utils'
 
 type Props = {
