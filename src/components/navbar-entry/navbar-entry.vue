@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import type { MenuAdvancedChild, MenuAdvancedChildCollapsable } from 'waltz-ui'
+import type { MenuAdvancedChild, MenuAdvancedChildCollapsible } from 'waltz-ui'
 import { WIcon, WBadge, WAsync } from 'waltz-ui'
-import { isCurrent, memoizeBadge, isCollapsableRouteOpen } from '../utils'
+import { isCurrent, memoizeBadge, isCollapsibleRouteOpen } from '../utils'
 
 type Props = {
   item: MenuAdvancedChild & RouteRecordRaw
@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<Props>(), {
     </w-badge>
 
     <div v-if="'collapsed' in item">
-      <w-icon v-if="isCollapsableRouteOpen(item)" icon="angle-up"></w-icon>
+      <w-icon v-if="isCollapsibleRouteOpen(item)" icon="angle-up"></w-icon>
       <w-icon v-else icon="angle-down"></w-icon>
     </div>
 

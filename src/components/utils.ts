@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import type { MenuAdvancedChild, MenuAdvancedChildCollapsable } from 'waltz-ui'
+import type { MenuAdvancedChild, MenuAdvancedChildCollapsible } from 'waltz-ui'
 import { useStore, useBreakpoints, useNavbar } from 'waltz-ui'
 import { reactive, toRefs } from 'vue'
 
@@ -52,7 +52,7 @@ export const navbarEntryOpen = (node: MenuAdvancedChild): boolean | undefined =>
   }
 }
 
-export const isCollapsableRouteOpen = (node: MenuAdvancedChildCollapsable) => {
+export const isCollapsibleRouteOpen = (node: MenuAdvancedChildCollapsible) => {
   if( node.collapsed !== 'user' && navbarEntryOpen(node) ) {
     node.collapsed = false
     return true

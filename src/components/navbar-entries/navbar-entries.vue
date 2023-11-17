@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
 import type { MenuSchemaNode, MenuAdvancedChild } from 'waltz-ui'
-import { isCollapsableRouteOpen, routeClick } from '../utils'
+import { isCollapsibleRouteOpen, routeClick } from '../utils'
 import NavbarEntry from '../navbar-entry/navbar-entry.vue'
 
 type Props = {
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
       memoKey: `${memoKey}-${cindex}`
     }"></navbar-entry>
 
-    <div v-if="'collapsed' in child && isCollapsableRouteOpen(child)">
+    <div v-if="'collapsed' in child && isCollapsibleRouteOpen(child)">
       <navbar-entries v-bind="{
         item: child,
         level: level + 1,
