@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import type { MenuAdvancedChild, MenuAdvancedChildCollapsible } from 'waltz-ui'
+import type { MenuNode } from 'waltz-ui'
 import { useStore, useBreakpoints, useNavbar } from 'waltz-ui'
 import { reactive, toRefs } from 'vue'
 
@@ -34,9 +34,9 @@ export const navbarRefs = reactive({
 
 export const { routes, isCurrent } = toRefs(navbarRefs)
 
-export const navbarEntryOpen = (node: MenuAdvancedChild): boolean | undefined => {
+export const navbarEntryOpen = (node: MenuNode): boolean | undefined => {
   if( 'children' in node ) {
-    return node.children.some((child) => {
+    return node.children!.some((child) => {
       if( typeof child === 'string' ) {
         return
       }
@@ -52,7 +52,14 @@ export const navbarEntryOpen = (node: MenuAdvancedChild): boolean | undefined =>
   }
 }
 
-export const isCollapsibleRouteOpen = (node: MenuAdvancedChildCollapsible) => {
+export const isCollapsibleRouteOpen = (node: MenuNode) => {
+  if( !('collapsed' in node) ) {
+    if( !('children' in node) ) {
+      return false
+    }
+    return true
+  }
+
   if( node.collapsed !== 'user' && navbarEntryOpen(node) ) {
     node.collapsed = false
     return true
@@ -61,7 +68,7 @@ export const isCollapsibleRouteOpen = (node: MenuAdvancedChildCollapsible) => {
   return !node.collapsed
 }
 
-export const routeClick = (node: MenuAdvancedChild) => {
+export const routeClick = (node: MenuNode) => {
   if( 'collapsed' in node ) {
     node.collapsed = node.collapsed
       ? false

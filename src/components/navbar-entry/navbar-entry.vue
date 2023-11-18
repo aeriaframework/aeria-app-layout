@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import type { MenuAdvancedChild, MenuAdvancedChildCollapsible } from 'waltz-ui'
+import type { MenuNode } from 'waltz-ui'
 import { WIcon, WBadge, WAsync } from 'waltz-ui'
 import { isCurrent, memoizeBadge, isCollapsibleRouteOpen } from '../utils'
 
 type Props = {
-  item: MenuAdvancedChild & RouteRecordRaw
+  item: MenuNode & RouteRecordRaw
   memoKey: string
   level?: number
 }
