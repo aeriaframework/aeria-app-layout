@@ -9,7 +9,7 @@ import {
   navbarRefs,
   routes,
   pushRoute,
-  routeClick
+  routeClick,
 } from '../utils'
 
 import NavbarEntry from '../navbar-entry/navbar-entry.vue'

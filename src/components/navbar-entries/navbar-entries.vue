@@ -5,7 +5,7 @@ import { isCollapsibleRouteOpen, routeClick } from '../utils'
 import NavbarEntry from '../navbar-entry/navbar-entry.vue'
 
 type Props = {
-  item: MenuNode
+  item: MenuNode & RouteRecordRaw
   memoKey: string
   level?: number
 }
@@ -16,25 +16,30 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div
-    v-clickable
-    v-for="(child, cindex) in item.children as (MenuNode & RouteRecordRaw)[]"
-    :key="`child-${cindex}`"
-    @click.stop="routeClick(child)"
-  >
-    <navbar-entry
-      v-if="'meta' in child"
-      v-bind="{
-        item: child,
-        level,
-        memoKey: `${memoKey}-${cindex}`
-    }"></navbar-entry>
+  <navbar-entry
+    v-if="'meta' in item"
+    v-bind="{
+      item,
+      level,
+      memoKey: `parent-1`
+    }"
+    @click.stop="routeClick(item)"
+  ></navbar-entry>
 
-    <div v-if="isCollapsibleRouteOpen(child)">
-      <navbar-entries v-bind="{
-        item: child,
-        level: level + 1,
-        memoKey: `${memoKey}-${cindex}`
+  <div v-if="isCollapsibleRouteOpen(item)">
+    <div
+      v-clickable
+      v-for="(child, cindex) in item.children as (MenuNode & RouteRecordRaw)[]"
+      :key="`child-${cindex}`"
+      @click.stop="routeClick(child)"
+    >
+      <navbar-entries
+        v-bind="{
+          item: child,
+          level: 'meta' in item
+            ? level + 1
+            : level,
+          memoKey: `${memoKey}-${cindex}`
       }"></navbar-entries>
     </div>
   </div>

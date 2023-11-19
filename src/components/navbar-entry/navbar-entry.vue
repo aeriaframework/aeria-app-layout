@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
       ${level > 0 && 'navbar__route--sub'}
     `"
 
-    :style="`--level-padding: ${1.2*level}rem;`"
+    :style="`--level-padding: ${level};`"
   >
     <w-icon
       :icon="item.meta!.icon"
