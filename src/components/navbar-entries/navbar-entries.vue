@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
     v-bind="{
       item,
       level,
-      memoKey: `parent-1`
+      memoKey
     }"
     @click.stop="routeClick(item)"
   ></navbar-entry>
