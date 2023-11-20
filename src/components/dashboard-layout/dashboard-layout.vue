@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type MenuSchema, useStore, useNavbar } from 'waltz-ui'
 import { inject, ref, computed, onMounted } from 'vue'
-import { WIcon, WContextMenu, WPicture, WBadge } from '@waltz-ui/ui'
+import { AeriaIcon, AeriaContextMenu, AeriaPicture, AeriaBadge } from '@waltz-ui/ui'
 
 
 import {
@@ -47,7 +47,7 @@ const parentRoutes = computed(() => {
     v-if="routerReady"
     class="
       dashboard
-      w-body
+      aeria-body
   ">
     <div :class="`
       no-print
@@ -55,12 +55,12 @@ const parentRoutes = computed(() => {
       ${ metaStore.menu.visible && 'dashboard__sidebar--visible' }
     `">
       <div class="dashboard__navbar-top">
-        <w-icon
+        <aeria-icon
           v-if="!breakpoints.md"
           v-clickable
           icon="multiply"
           @click="metaStore.menu.visible = false"
-        ></w-icon>
+        ></aeria-icon>
 
         <img
           v-clickable
@@ -100,12 +100,12 @@ const parentRoutes = computed(() => {
 
     <div class="dashboard__content">
       <div class="dashboard__topbar">
-        <w-icon
+        <aeria-icon
           v-if="!breakpoints.md"
           v-clickable
           icon="bars"
           @click="metaStore.menu.visible = true"
-        ></w-icon>
+        ></aeria-icon>
 
         <img
           v-if="!breakpoints.md"
@@ -134,15 +134,15 @@ const parentRoutes = computed(() => {
           name="super"
         ></slot>
 
-        <w-context-menu>
+        <aeria-context-menu>
           <div
             v-clickable
             class="dashboard__user"
           >
-            <w-picture
+            <aeria-picture
               :file-id="currentUser.picture?._id || currentUser.picture"
               class="dashboard__user-picture"
-            ></w-picture>
+            ></aeria-picture>
 
             <div>Olá, {{ currentUser.full_name.split(' ')[0] }}</div>
           </div>
@@ -154,35 +154,35 @@ const parentRoutes = computed(() => {
               </div>
 
               <div class="dashboard__user-context-roles">
-                <w-badge
+                <aeria-badge
                   v-for="role in currentUser.roles"
                   :key="`role-${role}`"
                   large
                 >
                   {{ $t(role) }}
-                </w-badge>
+                </aeria-badge>
               </div>
             </div>
           </template>
 
           <template #profile>
-            <w-icon
+            <aeria-icon
               icon="user-square"
               @click="router.push('/dashboard/user/profile')"
             >
               Perfil
-            </w-icon>
+            </aeria-icon>
           </template>
 
           <template #logout>
-            <w-icon
+            <aeria-icon
               icon="signout"
               @click="userStore.$actions.signout(); router.push('/user/signin')"
             >
               Sair
-            </w-icon>
+            </aeria-icon>
           </template>
-        </w-context-menu>
+        </aeria-context-menu>
 
       </div>
 

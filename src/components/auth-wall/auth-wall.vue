@@ -10,7 +10,7 @@ provide('innerInputLabel', true)
   <div class="auth">
     <div class="
       auth__content
-      w-surface
+      aeria-surface
     ">
       <div class="auth__view">
         <router-view></router-view>

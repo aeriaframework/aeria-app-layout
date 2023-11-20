@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
 import type { MenuNode } from 'waltz-ui'
-import { WIcon, WBadge, WAsync } from 'waltz-ui'
+import { AeriaIcon, AeriaBadge, AeriaAsync } from 'waltz-ui'
 import { isCurrent, memoizeBadge, isCollapsibleRouteOpen } from '../utils'
 
 type Props = {
@@ -25,20 +25,20 @@ const props = withDefaults(defineProps<Props>(), {
 
     :style="`--level-padding: ${level};`"
   >
-    <w-icon
+    <aeria-icon
       :icon="item.meta!.icon"
       icon-classes="branded-icon"
     >
       {{ capitalize($t(item.meta!.title)) }}
-    </w-icon>
+    </aeria-icon>
 
-    <w-badge v-if="item.badge" alt>
-      <w-async :promise="memoizeBadge(item.badge, memoKey)"></w-async>
-    </w-badge>
+    <aeria-badge v-if="item.badge" alt>
+      <aeria-async :promise="memoizeBadge(item.badge, memoKey)"></aeria-async>
+    </aeria-badge>
 
     <div v-if="'collapsed' in item">
-      <w-icon v-if="isCollapsibleRouteOpen(item)" icon="angle-up"></w-icon>
-      <w-icon v-else icon="angle-down"></w-icon>
+      <aeria-icon v-if="isCollapsibleRouteOpen(item)" icon="angle-up"></aeria-icon>
+      <aeria-icon v-else icon="angle-down"></aeria-icon>
     </div>
 
   </div>
