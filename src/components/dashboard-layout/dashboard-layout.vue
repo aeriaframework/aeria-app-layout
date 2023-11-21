@@ -30,7 +30,7 @@ onMounted(async () => {
   routerReady.value = true
 })
 
-const logoUrl = new URL('/static/logo.png', import.meta.url).href
+const logoUrl = new URL('/logo.png', import.meta.url).href
 
 const topLevelRoutes = computed(() => {
   return routes.value.filter((route) => route.children.length === 0)
