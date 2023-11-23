@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
     <aeria-icon
       :icon="item.meta!.icon"
       style="
-        --icon-size: 1.4rem;
+        --icon-size: 1.2rem;
         --icon-color: var(--theme-brand-color-shade-2);
       "
     >
