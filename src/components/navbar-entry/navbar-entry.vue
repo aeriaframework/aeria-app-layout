@@ -27,7 +27,10 @@ const props = withDefaults(defineProps<Props>(), {
   >
     <aeria-icon
       :icon="item.meta!.icon"
-      icon-classes="branded-icon"
+      style="
+        --icon-size: 1.4rem;
+        --icon-color: var(--theme-brand-color-shade-2);
+      "
     >
       {{ capitalize($t(item.meta!.title)) }}
     </aeria-icon>

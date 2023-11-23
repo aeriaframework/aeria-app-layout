@@ -204,8 +204,3 @@ const parentRoutes = computed(() => {
 
 <style scoped src="./dashboard-layout.less"></style>
 
-<style lang="less">
-.branded-icon {
-  fill: var(--theme-brand-color-shade-2);
-}
-</style>
