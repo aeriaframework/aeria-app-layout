@@ -77,6 +77,6 @@ export const routeClick = (node: MenuNode) => {
   }
 
   pushRoute({
-    name: node.name
+    name: node.name as string
   })
 }

@@ -30,4 +30,15 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module '@vue/runtime-core' {
+  import type { TemplateFunctions } from '@waltz-ui/web'
+
+  interface ComponentCustomProperties extends TemplateFunctions {
+    instanceConfig: typeof import('waltz-build').InstanceConfig,
+    currentUser: typeof import('@sonata-api/system/collections').User
+  }
+}
+
+export {}
 //

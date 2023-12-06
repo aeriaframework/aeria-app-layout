@@ -3,7 +3,6 @@ import { type MenuSchema, useStore, useNavbar } from 'waltz-ui'
 import { inject, ref, computed, onMounted } from 'vue'
 import { AeriaIcon, AeriaContextMenu, AeriaPicture, AeriaBadge } from '@waltz-ui/ui'
 
-
 import {
   breakpoints,
   navbarRefs,
@@ -186,7 +185,10 @@ const parentRoutes = computed(() => {
 
       </div>
 
-      <div class="dashboard__view">
+      <div :class="{
+        'dashboard__view': true,
+        'dashboard__view--padded': !$route.meta.fill
+      }">
         <router-view
           v-if="!breakpoints.md"
           name="topbar"

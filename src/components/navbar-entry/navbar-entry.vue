@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
     :style="`--level-padding: ${level};`"
   >
     <aeria-icon
-      :icon="item.meta!.icon"
+      :icon="item.meta!.icon!"
       style="
         --icon-size: 1.2rem;
         --icon-color: var(--theme-brand-color-shade-2);
