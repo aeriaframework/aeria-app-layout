@@ -1,9 +1,8 @@
 {
   "name": "aeria-app-layout",
-  "type": "module",
   "version": "0.0.20",
   "description": "",
-  "main": "dist/aeria-app-layout.js",
+  "main": "dist/aeria-app-layout.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +10,7 @@
     "prepublishOnly": "npm run build"
   },
   "exports": {
-    ".": "./dist/aeria-app-layout.js",
+    ".": "./dist/aeria-app-layout.mjs",
     "./style.css": "./dist/style.css"
   },
   "files": [

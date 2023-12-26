@@ -4,6 +4,11 @@ import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      'bson': require.resolve('bson')
+    }
+  },
   plugins: [
     vue(),
     dts({
@@ -28,9 +33,19 @@ export default defineConfig({
       external: [
         'vue',
         'vue-router',
-        /@waltz-ui\/ui/,
-        /@waltz-ui\/web/
+        /@waltz-ui\//,
+        /@sonata-api\//,
       ]
     },
+  },
+  optimizeDeps: {
+    include: [
+      'bson',
+      '@sonata-api/types',
+      '@sonata-api/common'
+    ],
+    exclude: [
+      'vue-router'
+    ]
   },
 })

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
 import type { MenuNode } from 'waltz-ui'
-import { AeriaIcon, AeriaBadge, AeriaAsync } from 'waltz-ui'
+import { t } from 'waltz-ui'
+import { AeriaIcon, AeriaBadge, AeriaAsync } from '@waltz-ui/ui'
 import { isCurrent, memoizeBadge, isCollapsibleRouteOpen } from '../utils'
 
 type Props = {
@@ -32,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
         --icon-color: var(--theme-brand-color-shade-2);
       "
     >
-      {{ capitalize($t(item.meta!.title)) }}
+      {{ capitalize(t(item.meta!.title, { plural: true })) }}
     </aeria-icon>
 
     <aeria-badge v-if="item.badge" alt>

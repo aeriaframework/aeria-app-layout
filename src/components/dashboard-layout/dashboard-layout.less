@@ -17,6 +17,9 @@
 }
 
 .dashboard {
+  --topbar-background-color: var(--dashboard-topbar-background-color, var(--theme-brand-color));
+  --navbar-top-background-color: var(--dashboard-navbar-top-background-color, var(--theme-brand-color-shade-2));
+
   @media screen and (min-width: 768px) {
     display: flex;
   }
@@ -88,9 +91,9 @@
     display: flex;
     align-items: center;
     gap: 1.8rem;
-
     z-index: 20;
-    background: var(--theme-brand-color);
+
+    background: var(--topbar-background-color);
     color: var(--theme-brand-color-contrast);
 
     .topbar-outer-padding();

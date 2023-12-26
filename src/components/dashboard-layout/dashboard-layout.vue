@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type MenuSchema, useStore, useNavbar } from 'waltz-ui'
+import { type MenuSchema, useStore, useNavbar, t } from 'waltz-ui'
 import { inject, ref, computed, onMounted } from 'vue'
 import { AeriaIcon, AeriaContextMenu, AeriaPicture, AeriaBadge } from '@waltz-ui/ui'
 
@@ -158,7 +158,7 @@ const parentRoutes = computed(() => {
                   :key="`role-${role}`"
                   large
                 >
-                  {{ $t(role) }}
+                  {{ t(role) }}
                 </aeria-badge>
               </div>
             </div>
