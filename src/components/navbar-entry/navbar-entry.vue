@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
         --icon-color: var(--theme-brand-color-shade-2);
       "
     >
-      {{ capitalize(t(item.meta!.title, { plural: true })) }}
+      {{ t(item.meta!.title, { plural: true, capitalize: true }) }}
     </aeria-icon>
 
     <aeria-badge v-if="item.badge" alt>

@@ -118,7 +118,7 @@ const parentRoutes = computed(() => {
           v-else
           class="dashboard__view-title"
         >
-          {{ capitalize(viewTitle) }}
+          {{ t(viewTitle, { capitalize: true }) }}
         </div>
 
         <router-view
