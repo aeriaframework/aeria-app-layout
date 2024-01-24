@@ -41,8 +41,8 @@ const props = withDefaults(defineProps<Props>(), {
     </aeria-badge>
 
     <div v-if="'collapsed' in item">
-      <aeria-icon v-if="isCollapsibleRouteOpen(item)" icon="angle-up"></aeria-icon>
-      <aeria-icon v-else icon="angle-down"></aeria-icon>
+      <aeria-icon v-if="isCollapsibleRouteOpen(item)" icon="caret-up"></aeria-icon>
+      <aeria-icon v-else icon="caret-down"></aeria-icon>
     </div>
 
   </div>

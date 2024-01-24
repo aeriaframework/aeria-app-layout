@@ -175,7 +175,7 @@ const parentRoutes = computed(() => {
 
           <template #logout>
             <aeria-icon
-              icon="signout"
+              icon="sign-out"
               @click="userStore.$actions.signout(); router.push('/user/signin')"
             >
               Sair
