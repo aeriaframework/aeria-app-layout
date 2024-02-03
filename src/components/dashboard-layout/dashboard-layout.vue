@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type MenuSchema, useStore, useNavbar, t } from 'waltz-ui'
-import { inject, ref, computed, onMounted } from 'vue'
+import { inject, computed, onMounted } from 'vue'
 import { AeriaIcon, AeriaContextMenu, AeriaPicture, AeriaBadge } from '@waltz-ui/ui'
 
 import {
@@ -16,7 +16,6 @@ import NavbarEntries from '../navbar-entries/navbar-entries.vue'
 
 const menuSchema = inject<MenuSchema>('menuSchema', [])
 
-const routerReady = ref(false)
 const router = ROUTER
 
 const metaStore = useStore('meta')
@@ -24,9 +23,7 @@ const userStore = useStore('user')
 
 onMounted(async () => {
   const navbar = await useNavbar({ schema: menuSchema })
-
   Object.assign(navbarRefs, navbar)
-  routerReady.value = true
 })
 
 const logoUrl = new URL('/logo.png', import.meta.url).href
@@ -42,11 +39,9 @@ const parentRoutes = computed(() => {
 
 
 <template>
-  <div
-    v-if="routerReady"
-    class="
-      dashboard
-      aeria-body
+  <div class="
+    dashboard
+    aeria-body
   ">
     <div :class="`
       no-print
@@ -57,7 +52,7 @@ const parentRoutes = computed(() => {
         <aeria-icon
           v-if="!breakpoints.md"
           v-clickable
-          icon="multiply"
+          icon="x"
           @click="metaStore.menu.visible = false"
         ></aeria-icon>
 
@@ -102,7 +97,7 @@ const parentRoutes = computed(() => {
         <aeria-icon
           v-if="!breakpoints.md"
           v-clickable
-          icon="bars"
+          icon="list"
           @click="metaStore.menu.visible = true"
         ></aeria-icon>
 
@@ -143,13 +138,13 @@ const parentRoutes = computed(() => {
               class="dashboard__user-picture"
             ></aeria-picture>
 
-            <div>Olá, {{ currentUser.full_name.split(' ')[0] }}</div>
+            <div>Olá, {{ currentUser.name.split(' ')[0] }}</div>
           </div>
 
           <template #header>
             <div class="dashboard__user-context-header">
               <div class="tx-text-[12pt]">
-                {{ currentUser.full_name }}
+                {{ currentUser.name }}
               </div>
 
               <div class="dashboard__user-context-roles">
@@ -176,7 +171,7 @@ const parentRoutes = computed(() => {
           <template #logout>
             <aeria-icon
               icon="sign-out"
-              @click="userStore.$actions.signout(); router.push('/user/signin')"
+              @click="router.push('/user/signin').then(() => userStore.$actions.signout())"
             >
               Sair
             </aeria-icon>
