@@ -16,8 +16,6 @@ import NavbarEntries from '../navbar-entries/navbar-entries.vue'
 
 const menuSchema = inject<MenuSchema>('menuSchema', [])
 
-const router = ROUTER
-
 const metaStore = useStore('meta')
 const userStore = useStore('user')
 
@@ -162,7 +160,7 @@ const parentRoutes = computed(() => {
           <template #profile>
             <aeria-icon
               icon="user-square"
-              @click="router.push('/dashboard/user/profile')"
+              @click="pushRoute('/dashboard/user/profile')"
             >
               Perfil
             </aeria-icon>
@@ -171,7 +169,7 @@ const parentRoutes = computed(() => {
           <template #logout>
             <aeria-icon
               icon="sign-out"
-              @click="router.push('/user/signin').then(() => userStore.$actions.signout())"
+              @click="pushRoute('/user/signin').then(() => userStore.$actions.signout())"
             >
               Sair
             </aeria-icon>

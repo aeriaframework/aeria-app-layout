@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router'
+import type { Router, RouteRecordRaw } from 'vue-router'
 import type { MenuNode } from 'waltz-ui'
 import { useStore, useBreakpoints, useNavbar } from 'waltz-ui'
 import { reactive, toRefs } from 'vue'
@@ -6,6 +6,12 @@ import { reactive, toRefs } from 'vue'
 export const breakpoints = useBreakpoints()
 
 export const badgeMemo: Record<string, any> = {}
+
+export const navbarRefs = reactive({
+  routes: [] as any[],
+  router: {} as Pick<Router, 'push'>,
+  isCurrent: (..._args: Parameters<Awaited<ReturnType<typeof useNavbar>>['isCurrent']>) => false
+})
 
 export const memoizeBadge = (promise: () => Promise<any> | any, key: string) => {
   if( key in badgeMemo ) {
@@ -16,21 +22,15 @@ export const memoizeBadge = (promise: () => Promise<any> | any, key: string) => 
   return result
 }
 
-
-export const pushRoute = (...args: Parameters<typeof ROUTER.push>) => {
-  window.scrollTo(0, 0)
-  ROUTER.push(...args)
-
+export const pushRoute = (...args: Parameters<Router['push']>) => {
   if( !breakpoints.value.md ) {
     const metaStore = useStore('meta')
     metaStore.menu.visible = false
   }
-}
 
-export const navbarRefs = reactive({
-  routes: [] as any[],
-  isCurrent: (..._args: Parameters<Awaited<ReturnType<typeof useNavbar>>['isCurrent']>) => false
-})
+  window.scrollTo(0, 0)
+  return navbarRefs.router.push(...args)
+}
 
 export const { routes, isCurrent } = toRefs(navbarRefs)
 
@@ -77,6 +77,6 @@ export const routeClick = (node: MenuNode) => {
   }
 
   pushRoute({
-    name: node.name as string
+    path: node.path!
   })
 }

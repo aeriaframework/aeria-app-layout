@@ -6,7 +6,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   resolve: {
     alias: {
-      'bson': require.resolve('bson')
+      'bson': require.resolve('bson'),
     }
   },
   plugins: [
