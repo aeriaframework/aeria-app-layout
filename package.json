@@ -1,6 +1,6 @@
 {
   "name": "aeria-app-layout",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "",
   "main": "dist/aeria-app-layout.mjs",
   "types": "dist/index.d.ts",
