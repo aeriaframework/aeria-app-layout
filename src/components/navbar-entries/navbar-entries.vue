@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import type { MenuNode } from 'waltz-ui'
+import { getGlobalStateManager, type MenuNode } from 'aeria-ui'
 import { isCollapsibleRouteOpen, routeClick } from '../utils'
 import NavbarEntry from '../navbar-entry/navbar-entry.vue'
 
@@ -10,9 +10,11 @@ type Props = {
   level?: number
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   level: 0
 })
+
+const manager = getGlobalStateManager()
 </script>
 
 <template>
@@ -23,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
       level,
       memoKey
     }"
-    @click.stop="routeClick(item)"
+    @click.stop="routeClick(item, manager)"
   ></navbar-entry>
 
   <div v-if="isCollapsibleRouteOpen(item)">
@@ -31,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
       v-clickable
       v-for="(child, cindex) in item.children as (MenuNode & RouteRecordRaw)[]"
       :key="`child-${cindex}`"
-      @click.stop="routeClick(child)"
+      @click.stop="routeClick(child, manager)"
     >
       <navbar-entries
         v-bind="{

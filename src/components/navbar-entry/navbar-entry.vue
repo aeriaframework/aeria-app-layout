@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import type { MenuNode } from 'waltz-ui'
-import { t } from 'waltz-ui'
-import { AeriaIcon, AeriaBadge, AeriaAsync } from '@waltz-ui/ui'
+import type { MenuNode } from 'aeria-ui'
+import { t } from 'aeria-ui'
+import { AeriaIcon, AeriaBadge, AeriaAsync } from '@aeria-ui/ui'
 import { isCurrent, memoizeBadge, isCollapsibleRouteOpen } from '../utils'
 
 type Props = {

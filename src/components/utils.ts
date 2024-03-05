@@ -1,6 +1,6 @@
 import type { Router, RouteRecordRaw } from 'vue-router'
-import type { MenuNode } from 'waltz-ui'
-import { useStore, useBreakpoints, useNavbar } from 'waltz-ui'
+import type { MenuNode } from 'aeria-ui'
+import { useStore, useBreakpoints, useNavbar, type GlobalStateManager } from 'aeria-ui'
 import { reactive, toRefs } from 'vue'
 
 export const breakpoints = useBreakpoints()
@@ -22,9 +22,9 @@ export const memoizeBadge = (promise: () => Promise<any> | any, key: string) => 
   return result
 }
 
-export const pushRoute = (...args: Parameters<Router['push']>) => {
+export const pushRoute = (manager: GlobalStateManager, ...args: Parameters<Router['push']>) => {
   if( !breakpoints.value.md ) {
-    const metaStore = useStore('meta')
+    const metaStore = useStore('meta', manager)
     metaStore.menu.visible = false
   }
 
@@ -68,7 +68,7 @@ export const isCollapsibleRouteOpen = (node: MenuNode) => {
   return !node.collapsed
 }
 
-export const routeClick = (node: MenuNode) => {
+export const routeClick = (node: MenuNode, manager: GlobalStateManager) => {
   if( 'collapsed' in node ) {
     node.collapsed = node.collapsed
       ? false
@@ -76,7 +76,8 @@ export const routeClick = (node: MenuNode) => {
     return
   }
 
-  pushRoute({
+  pushRoute(manager, {
     path: node.path!
   })
 }
+

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { type MenuSchema, useStore, useNavbar, t } from 'waltz-ui'
+import { type MenuSchema, useStore, useNavbar, t, getGlobalStateManager } from 'aeria-ui'
 import { inject, computed, onMounted } from 'vue'
-import { AeriaIcon, AeriaContextMenu, AeriaPicture, AeriaBadge } from '@waltz-ui/ui'
+import { AeriaIcon, AeriaContextMenu, AeriaPicture, AeriaBadge } from '@aeria-ui/ui'
 
 import {
   breakpoints,
@@ -18,6 +18,8 @@ const menuSchema = inject<MenuSchema>('menuSchema', [])
 
 const metaStore = useStore('meta')
 const userStore = useStore('user')
+
+const manager = getGlobalStateManager()
 
 onMounted(async () => {
   const navbar = await useNavbar({ schema: menuSchema })
@@ -58,7 +60,7 @@ const parentRoutes = computed(() => {
           v-clickable
           :src="logoUrl"
           class="dashboard__navbar-logo"
-          @click="pushRoute('/dashboard')"
+          @click="pushRoute(manager, '/dashboard')"
         />
       </div>
 
@@ -72,7 +74,7 @@ const parentRoutes = computed(() => {
             :key="`item-${index}`"
             :item="item"
             :memo-key="`entry-${index}`"
-            @click="routeClick(item)"
+            @click="routeClick(item, manager)"
           ></navbar-entry>
         </div>
 
@@ -104,7 +106,7 @@ const parentRoutes = computed(() => {
           v-clickable
           :src="logoUrl"
           class="dashboard__topbar-logo"
-          @click="pushRoute('/dashboard')"
+          @click="pushRoute(manager, '/dashboard')"
         />
 
         <div
@@ -160,7 +162,7 @@ const parentRoutes = computed(() => {
           <template #profile>
             <aeria-icon
               icon="user-square"
-              @click="pushRoute('/dashboard/user/profile')"
+              @click="pushRoute(manager, '/dashboard/user/profile')"
             >
               Perfil
             </aeria-icon>
@@ -169,7 +171,7 @@ const parentRoutes = computed(() => {
           <template #logout>
             <aeria-icon
               icon="sign-out"
-              @click="pushRoute('/user/signin').then(() => userStore.$actions.signout())"
+              @click="pushRoute(manager, '/user/signin').then(() => userStore.$actions.signout())"
             >
               Sair
             </aeria-icon>

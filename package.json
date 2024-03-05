@@ -30,8 +30,8 @@
   },
   "peerDependencies": {
     "vue": "*",
-    "waltz-build": "latest",
-    "waltz-ui": "latest"
+    "aeria-ui": "latest",
+    "aeria-ui-build": "latest"
   },
   "dependencies": {
     "less": "^4.2.0"
