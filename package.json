@@ -10,7 +10,7 @@
     "prepublishOnly": "npm run build"
   },
   "exports": {
-    ".": "./src/index.ts",
+    ".": "./dist/aeria-app-layout.mjs",
     "./style.css": "./dist/style.css"
   },
   "files": [
