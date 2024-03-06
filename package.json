@@ -10,7 +10,7 @@
     "prepublishOnly": "npm run build"
   },
   "exports": {
-    ".": "./dist/aeria-app-layout.mjs",
+    ".": "./src/index.ts",
     "./style.css": "./dist/style.css"
   },
   "files": [
@@ -20,7 +20,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@sonata-api/common": "latest",
     "@types/node": "^20.11.16",
     "@vitejs/plugin-vue": "^4.2.3",
     "rollup-plugin-typescript2": "^0.35.0",

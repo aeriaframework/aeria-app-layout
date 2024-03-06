@@ -33,16 +33,16 @@ export default defineConfig({
       external: [
         'vue',
         'vue-router',
-        /@waltz-ui\//,
-        /@sonata-api\//,
+        /@aeria-ui\//,
+        /@aeriajs\//,
       ]
     },
   },
   optimizeDeps: {
     include: [
       'bson',
-      '@sonata-api/types',
-      '@sonata-api/common'
+      '@aeriajs/types',
+      '@aeriajs/common'
     ],
     exclude: [
       'vue-router'
