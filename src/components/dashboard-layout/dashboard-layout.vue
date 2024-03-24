@@ -134,7 +134,7 @@ const parentRoutes = computed(() => {
             class="dashboard__user"
           >
             <aeria-picture
-              :file-id="currentUser.picture?._id || currentUser.picture"
+              :link="currentUser.picture"
               class="dashboard__user-picture"
             ></aeria-picture>
 

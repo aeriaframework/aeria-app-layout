@@ -29,6 +29,7 @@
   },
   "peerDependencies": {
     "vue": "*",
+    "@aeria-ui/theme": "latest",
     "aeria-ui": "latest",
     "aeria-ui-build": "latest"
   },
