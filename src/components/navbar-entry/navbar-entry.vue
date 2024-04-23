@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
 import type { MenuNode } from 'aeria-ui'
-import { t } from 'aeria-ui'
+import { t } from '@aeria-ui/i18n'
 import { AeriaIcon, AeriaBadge, AeriaAsync } from '@aeria-ui/ui'
-import { isCurrent, memoizeBadge, isCollapsibleRouteOpen } from '../utils'
+import { isCurrent, memoizeBadge, isCollapsibleRouteOpen } from '../utils.js'
 
 type Props = {
   item: MenuNode & RouteRecordRaw

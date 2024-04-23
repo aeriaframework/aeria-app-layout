@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { type MenuSchema, useStore, useNavbar, t, getGlobalStateManager } from 'aeria-ui'
+import { type MenuSchema, useNavbar } from '@aeria-ui/core'
+import { useStore, getGlobalStateManager } from '@aeria-ui/state-management'
+import { t } from '@aeria-ui/i18n'
 import { inject, computed, onMounted } from 'vue'
 import { AeriaIcon, AeriaContextMenu, AeriaPicture, AeriaBadge } from '@aeria-ui/ui'
 

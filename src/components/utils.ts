@@ -1,6 +1,7 @@
 import type { Router, RouteRecordRaw } from 'vue-router'
-import type { MenuNode } from 'aeria-ui'
-import { useStore, useBreakpoints, useNavbar, type GlobalStateManager } from 'aeria-ui'
+import type { MenuNode, GlobalStateManager } from 'aeria-ui'
+import { useBreakpoints, useNavbar } from '@aeria-ui/core'
+import { useStore } from '@aeria-ui/state-management'
 import { reactive, toRefs } from 'vue'
 
 export const breakpoints = useBreakpoints()

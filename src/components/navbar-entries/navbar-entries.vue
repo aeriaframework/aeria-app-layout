@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import { getGlobalStateManager, type MenuNode } from 'aeria-ui'
-import { isCollapsibleRouteOpen, routeClick } from '../utils'
+import type { MenuNode } from 'aeria-ui'
+import { getGlobalStateManager } from '@aeria-ui/state-management'
+import { isCollapsibleRouteOpen, routeClick } from '../utils.js'
 import NavbarEntry from '../navbar-entry/navbar-entry.vue'
 
 type Props = {
