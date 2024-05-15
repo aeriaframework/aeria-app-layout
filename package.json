@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@aeria-ui/ui": "^0.0.38",
+    "@aeria-ui/ui": "0.0",
     "@types/node": "^20.12.11",
     "@vitejs/plugin-vue": "^5.0.4",
     "rollup-plugin-typescript2": "^0.36.0",
@@ -29,10 +29,10 @@
     "vue-tsc": "^2.0.17"
   },
   "peerDependencies": {
-    "@aeria-ui/theme": "^0.0.10",
-    "aeria-ui": "^0.0.41",
-    "aeria-ui-build": "^0.0.8",
-    "vue": "^3.4.27"
+    "@aeria-ui/theme": "0.0",
+    "aeria-ui": "0.0",
+    "aeria-ui-build": "0.0",
+    "vue": "3.4"
   },
   "dependencies": {
     "less": "^4.2.0"
