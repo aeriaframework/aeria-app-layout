@@ -31,7 +31,6 @@
   "peerDependencies": {
     "@aeria-ui/theme": "0.0",
     "aeria-ui": "0.0",
-    "aeria-ui-build": "0.0",
     "vue": "3.4"
   },
   "dependencies": {
